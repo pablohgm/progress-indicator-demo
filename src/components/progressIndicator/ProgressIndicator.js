@@ -14,13 +14,18 @@ class ProgressIndicator extends HTMLElement {
     });
     let indicator = this.getAttribute('indicator');
     let target = this.getAttribute('target');
-    this.updatePending(indicator, target);
+    //this.updatePending(indicator, target);
+    //this.updateTarget(target);
     this.animate(indicator);
   }
 
   updatePending(indicator, target) {
     let pending = target - indicator;
     this.getElementsByClassName('pi__message')[0].innerHTML = `You need $${pending} more to reach your target.`;
+  }
+
+  updateTarget(target) {
+    this.getElementsByClassName('pi__target-panel')[0].innerHTML = `Target $${target}`;
   }
 
   // TODO: delete
