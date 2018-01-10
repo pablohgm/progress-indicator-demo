@@ -9,14 +9,12 @@ class ProgressIndicator extends HTMLElement {
 
   connectedCallback(){
     this.innerHTML = `<style>${style}</style>${template}`;
-    this.addEventListener('click', e => {
-      this.toggleCard();
-    });
     let indicator = this.getAttribute('indicator');
     let target = this.getAttribute('target');
-    //this.updatePending(indicator, target);
-    //this.updateTarget(target);
-    this.animate(indicator);
+    this.updatePending(indicator, target);
+    this.updateTarget(target);
+    this.updateIndicator(indicator);
+    this.animate(indicator, target);
   }
 
   updatePending(indicator, target) {
@@ -25,29 +23,33 @@ class ProgressIndicator extends HTMLElement {
   }
 
   updateTarget(target) {
-    this.getElementsByClassName('pi__target-panel')[0].innerHTML = `Target $${target}`;
+    this.getElementsByClassName('pi__target-text')[0].innerHTML = `Target $${target}`;
   }
 
-  // TODO: delete
-  attributeChangedCallback(attrName, oldVal, newVal) { 
-    console.log(attrName);
-    console.log(oldVal);
-    console.log(newVal);
-  };
-
-  toggleCard() {
-    console.log("Element was clicked!");
+  updateIndicator(target) {
+    this.getElementsByClassName('pi__indicator')[0].innerHTML = `$${target}`;
   }
 
-  animate(indicator) {
-    let element = document.getElementsByClassName("pi__progress-bar")[0]; 
+  animate(indicator, target) {
+    let max = Math.round((100*indicator)/target);
+    let element = document.getElementsByClassName("pi__progress-bar")[0];
+    let tmpIndicator = document.getElementsByClassName('pi__indicator')[0];
     let width = 1;
     let id = setInterval(() => {
-      if (width >= indicator) {
+      if (width >= max) {
         clearInterval(id);
       } else {
           width++; 
           element.style.width = width + '%'; 
+      }
+    }, 100);
+
+    let idIndicator = setInterval(() => {
+      if (width >= indicator) {
+        clearInterval(idIndicator);
+      } else {
+          width++; 
+          tmpIndicator.innerHTML = `$${width}`;
       }
     }, 100);
   }
