@@ -24,6 +24,7 @@
     "babel-preset-es2016": "^6.24.1",
     "css-loader": "^0.28.8",
     "html-loader": "^0.5.4",
+    "svg-inline-loader": "^0.8.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"
   }
