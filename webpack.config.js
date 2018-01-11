@@ -4,8 +4,8 @@ module.exports = {
     entry: "./app.js",
     output: {
       filename: "bundle.js",
-      path: path.join(__dirname, "dist"),
-      publicPath: "dist",
+      path: path.join(__dirname, "public"),
+      publicPath: "public",
     },
     watch: true,
     devServer: {

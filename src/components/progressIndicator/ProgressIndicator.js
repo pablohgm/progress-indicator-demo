@@ -35,6 +35,7 @@ class ProgressIndicator extends HTMLElement {
     let element = document.getElementsByClassName("pi__progress-bar")[0];
     let tmpIndicator = document.getElementsByClassName('pi__indicator')[0];
     let width = 1;
+    
     let id = setInterval(() => {
       if (width >= max) {
         clearInterval(id);
